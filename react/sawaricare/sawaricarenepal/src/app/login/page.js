@@ -1,8 +1,9 @@
-import { Button, Card, CardBody, CardHeader, Image, Input, LinkIcon } from '@nextui-org/react'
+import { Button, Card, CardBody, CardFooter, CardHeader, Image, Input, LinkIcon } from '@nextui-org/react'
 import Link from 'next/link'
 import React from 'react'
 
  const login = () => {
+ 
 
    return (
      <div className='w-full h-screen flex justify-center items-center bg-slate-50'>
@@ -17,20 +18,24 @@ import React from 'react'
         />
         </CardHeader>
       <CardBody className='gap-3'>
-        <Input      
-          type="email"
-          label="Email"         
-        />
-        <Input
-          label="Password"         
-          type='password'        
-        />
-         <p className='text-right'><Link href="/forgetpasswrod">Forget Password</Link></p>
+      <Input
+            type="email"
+            label="Email" 
+            labelPlacement="outside" 
+          />
+          <Input
+            type="password"
+            label="Password"
+            labelPlacement="outside"          
+          />        
+      <p className='text-right'><Link href="/forgetpasswrod">Forget Password</Link></p>
      <Button className='bg-slate-800 text-white font-bold uppercase'>
         Login
     </Button>
     </CardBody>
+    <CardFooter>
         <p className='m-auto pb-5 font-light'>Don't have account yet? <Link href="/signup" > <strong>Sign Up</strong></Link> Instead</p>
+        </CardFooter>
     </Card>
      </div>
    )

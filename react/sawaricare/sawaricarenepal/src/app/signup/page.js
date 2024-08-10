@@ -1,4 +1,4 @@
-import { Button, Card, CardBody, CardHeader, DatePicker, Image, Input } from '@nextui-org/react'
+import { Button, Card, CardBody, CardFooter, CardHeader, DatePicker, Image, Input } from '@nextui-org/react'
 import Link from 'next/link'
 import React from 'react'
 
@@ -19,29 +19,35 @@ import React from 'react'
       <CardBody className='gap-3'>
       <Input      
           type="text"
-          label="Fullname"         
+          label="Fullname" 
+          labelPlacement="outside"         
         />
        <DatePicker 
             label="Birth date" 
+            labelPlacement="outside" 
        />
         <Input      
           type="email"
-          label="Email"         
+          label="Email"   
+          labelPlacement="outside"       
         />
         <Input
           label="Password"         
-          type='password'        
+          type='password'  
+          labelPlacement="outside"       
         />
         <Input
           label="Confirm Password"         
-          type='password'        
-        />
-       
-     <Button className='bg-slate-800 text-white font-bold uppercase'>
-        Login
+          type='password'  
+          labelPlacement="outside"       
+        />       
+       <Button className='bg-slate-800 mt-2 text-white font-bold uppercase'>
+        Sign Up
     </Button>
     </CardBody>
-        <p className='m-auto pb-5 font-light'>Already have an account? <Link href="/login" > <strong>Login</strong></Link> Instead</p>
+    <CardFooter>      
+        <p className='m-auto font-light'>Already have an account? <Link href="/login" > <strong>Login</strong></Link> Instead</p>
+     </CardFooter>
     </Card>
      </div>
    )
