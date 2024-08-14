@@ -1,15 +1,26 @@
- import { Button, Card, CardBody, CardHeader, Image, Input } from '@nextui-org/react'
-import Link from 'next/link'
+'use client'
+import { Button } from '@nextui-org/react';
+import { useState } from "react";
+
 import React from 'react'
 
- const login = () => {
+const Home = () => {
+  let [num, setNum] = useState(10);
+  const handleIncrement = ()=>{
+    setNum(num + 1)
+  }
 
-   return (
-     <div className='w-full h-screen flex justify-center items-center bg-slate-50'>
-     I am home page
-     </div>
-   )
- }
+  const handleDecrement =()=>
+  {
+    setNum(num-1)
+  }
+  return (
+    <div>
+      {num}
+      <Button onClick={handleIncrement}>Increment</Button>
+      <Button onClick={handleDecrement}>Decrement</Button>
+      </div>
+  )
+}
  
- export default login
- 
+export default Home

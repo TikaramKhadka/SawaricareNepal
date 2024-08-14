@@ -53,7 +53,7 @@ const Signup = () => {
                   style={{ borderBottomLeftRadius: '0', borderBottomRightRadius: '0' }}
                 />
               </CardHeader>
-              <CardBody className="gap-3">               
+              <CardBody className="gap-2">               
               <div>
                   <Input
                     type="text"
@@ -67,7 +67,7 @@ const Signup = () => {
 
                   />               
                   {errors.fullname && touched.fullname && (
-                    <div className="text-red-500 text-sm mt-1">{errors.fullname}</div>
+                    <div className="text-red-500 text-sm">{errors.fullname}</div>
                   )}
                 </div>              
                 <div>        
@@ -81,7 +81,7 @@ const Signup = () => {
                     className={`w-full p-2 border ${errors.birthdate && touched.birthdate ? 'border-red-500' : 'border-white'} rounded`}
                   />                 
                   {errors.birthdate && touched.birthdate && (
-                    <div className="text-red-500 text-sm mt-1">{errors.birthdate}</div>
+                    <div className="text-red-500 text-sm">{errors.birthdate}</div>
                   )}
                 </div>              
                 <div>
@@ -94,7 +94,7 @@ const Signup = () => {
                     className={`w-full p-2 border ${errors.email && touched.email ? 'border-red-500' : 'border-white'} rounded`}
                   />
                   {errors.email && touched.email && (
-                    <div className="text-red-500 text-sm mt-1">{errors.email}</div>
+                    <div className="text-red-500 text-sm">{errors.email}</div>
                   )}
                 </div>
 
@@ -110,7 +110,7 @@ const Signup = () => {
                     className={`w-full p-2 border ${errors.password && touched.password ? 'border-red-500' : 'border-white'} rounded`}
                   />                 
                   {errors.password && touched.password && (
-                    <div className="text-red-500 text-sm mt-1">{errors.password}</div>
+                    <div className="text-red-500 text-sm">{errors.password}</div>
                   )}
                 </div>
                 <div>
@@ -126,7 +126,7 @@ const Signup = () => {
 
                   />                 
                   {errors.confirmPassword && touched.confirmPassword && (
-                    <div className="text-red-500 text-sm mt-1">{errors.confirmPassword}</div>
+                    <div className="text-red-500 text-sm">{errors.confirmPassword}</div>
                   )}
                 </div>
                 <Button type="submit" className="bg-slate-800 mt-2 text-white font-bold uppercase w-full">
