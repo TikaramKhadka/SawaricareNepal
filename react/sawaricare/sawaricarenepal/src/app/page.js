@@ -1,26 +1,26 @@
 'use client'
-import { Button } from '@nextui-org/react';
-import { useState } from "react";
-import React from 'react'
+import AdminTopNavbar from "@/components/(authenticate)/navbar/page";
+import AdminSideNavbar from "@/components/(authenticate)/sidebar/page";
 
-const Home = () => {
-  let [num, setNum] = useState(10);
+const AdminDashBoard = () => {
+    return (
+      <div className="flex flex-col h-screen">
+        <AdminTopNavbar />
+        <div className="flex flex-1">
+          <AdminSideNavbar/>
+          <MainContent />
+        </div>
+      </div>
+    );
+  };
 
-  const handleChange = (action) => {
-    if (action === "increment" && num < 10) {
-      setNum(num + 1);
-    } else if (action === "decrement" && num > 0) {
-      setNum(num - 1);
-    }
-  }
-
-  return (
-    <div>
-      {num}
-      <Button onClick={() => handleChange("increment")}>Increment</Button>
-      <Button onClick={() => handleChange("decrement")}>Decrement</Button>
-    </div>
-  );
-}
-
-export default Home;
+  const MainContent = () => {
+    return (
+      <div className="p-6 bg-gray-100 flex-1 h-screen overflow-auto">
+        <h1 className="text-3xl font-bold">Welcome to Admin Dashboard</h1>
+        <p className="mt-4">This is the main content area.</p>
+      </div>
+    );
+  };
+  
+  export default AdminDashBoard;
