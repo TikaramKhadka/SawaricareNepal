@@ -81,7 +81,7 @@ const AdminNavbar = () => {
             onClick={toggleProfileDropdown}
           >
             <FaUserCircle className="text-3xl" />
-            <span className="text-lg">John Doe</span>
+            <span className="text-lg">Forgoton</span>
           </div>
 
           {profileDropdownOpen && (

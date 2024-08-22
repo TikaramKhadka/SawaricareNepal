@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaHome, FaTags, FaBox, FaUsers, FaCog, FaChartBar } from 'react-icons/fa'; // Importing icons from FontAwesome
+import { BsCartPlusFill } from "react-icons/bs";
 
 const AdminSidebar = () => {
   return (
@@ -17,6 +18,10 @@ const AdminSidebar = () => {
         <li className="p-3 hover:bg-gray-700 flex items-center space-x-2">
           <FaBox className="text-xl" />
           <span>Product</span>
+        </li>
+        <li className="p-3 hover:bg-gray-700 flex items-center space-x-2">
+          <BsCartPlusFill className="text-xl" />
+          <span>Order</span>
         </li>
         <li className="p-3 hover:bg-gray-700 flex items-center space-x-2">
           <FaUsers className="text-xl" />
