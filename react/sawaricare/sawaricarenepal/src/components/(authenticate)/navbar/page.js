@@ -38,7 +38,7 @@ const AdminNavbar = () => {
   return (
     <nav className="bg-gray-800 text-white h-[100px] flex items-center px-6 shadow-lg relative">
       <div className="flex items-center">
-        <span className="text-2xl flex items-center font-bold uppercase h-14">
+        <span className="text-xl flex items-center font-bold uppercase h-14">
           Sawaricare Nepal
         </span>
       </div>
