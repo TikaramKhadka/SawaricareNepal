@@ -46,10 +46,10 @@ const Box = () => {
             </div>          
             <input className='m-5 border' onChange={handleChange} placeholder="Enter color..." />        
             <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
-                <Button onClick={() => dispatch(moveLeft())}><FaArrowLeft /></Button>
-                <Button onClick={() => dispatch(moveRight())}><FaArrowRight /></Button>
+                <Button onClick={() => dispatch(moveLeft())}><FaArrowLeft /></Button>              
                 <Button onClick={() => dispatch(moveUp())}><FaArrowUp /></Button>
                 <Button onClick={() => dispatch(moveDown())}><FaArrowDown /></Button>
+                <Button onClick={() => dispatch(moveRight())}><FaArrowRight /></Button>
                 <Button onClick={() => dispatch(changeShape())}>Change Shape</Button>
                 <Button onClick={() => dispatch(increaseSize())}>Increase Width</Button>
                 <Button onClick={() => dispatch(decreaseSize())}>Decrease Width</Button>
