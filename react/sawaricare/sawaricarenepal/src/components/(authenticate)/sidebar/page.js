@@ -1,43 +1,50 @@
-import React from 'react';
-import { FaHome, FaTags, FaBox, FaUsers, FaCog, FaChartBar } from 'react-icons/fa'; // Importing icons from FontAwesome
-import { BsCartPlusFill } from "react-icons/bs";
+'use client';
+import React from "react";
+import { FaTrash } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { removeFromCartItems, removeFromWishlist } from '@/redux/reducerSlice/productSlice'; // Ensure correct import
 
-const AdminSidebar = () => {
-  return (
-    <div className="bg-gray-800 text-white w-64 hidden lg:block">
-      <div className="p-4 font-bold text-xl">Dashboard</div>
-      <ul className="space-y-2">
-        <li className="p-3 hover:bg-gray-700 flex items-center space-x-2">
-          <FaHome className="text-xl" />
-          <span>Brand</span>
-        </li>
-        <li className="p-3 hover:bg-gray-700 flex items-center space-x-2">
-          <FaTags className="text-xl" />
-          <span>Category</span>
-        </li>
-        <li className="p-3 hover:bg-gray-700 flex items-center space-x-2">
-          <FaBox className="text-xl" />
-          <span>Product</span>
-        </li>
-        <li className="p-3 hover:bg-gray-700 flex items-center space-x-2">
-          <BsCartPlusFill className="text-xl" />
-          <span>Order</span>
-        </li>
-        <li className="p-3 hover:bg-gray-700 flex items-center space-x-2">
-          <FaUsers className="text-xl" />
-          <span>Users</span>
-        </li>
-        <li className="p-3 hover:bg-gray-700 flex items-center space-x-2">
-          <FaCog className="text-xl" />
-          <span>Settings</span>
-        </li>
-        <li className="p-3 hover:bg-gray-700 flex items-center space-x-2">
-          <FaChartBar className="text-xl" />
-          <span>Reports</span>
-        </li>
-      </ul>
-    </div>
-  );
-};
+export default function Sidebar() {
+    const { wishlistItems, cartItems } = useSelector(state => state.product);
+    const dispatch = useDispatch();
 
-export default AdminSidebar;
+    return (
+        <div className="w-full max-w-[260px] border-small px-1 py-2 rounded-small border-default-200 dark:border-default-100">
+            {/* Wishlist Section */}
+            <div className="mb-4">
+                <h2 className="text-lg font-bold mb-2">Wishlist Items ({wishlistItems.length}):</h2>
+                {wishlistItems.length > 0 ? (
+                    wishlistItems.map((item, id) => (
+                        <div className="flex items-center justify-between p-2 border-b border-gray-200" key={item.id}>
+                            <span>{id + 1} - {item.productName}</span>
+                            <FaTrash
+                                className="ml-2 cursor-pointer text-red-500"
+                                onClick={() => dispatch(removeFromWishlist({ id: item.id }))}
+                            />
+                        </div>
+                    ))
+                ) : (
+                    <p className="text-gray-500">No Wishlist!!</p>
+                )}
+            </div>
+
+            {/* Cart Section */}
+            <div>
+                <h2 className="text-lg font-bold mb-2">Cart Items ({cartItems.length}):</h2>
+                {cartItems.length > 0 ? (
+                    cartItems.map((item, id) => (
+                        <div className="flex items-center justify-between p-2 border-b border-gray-200" key={item.id}>
+                            <span>{id + 1} - {item.productName} (Qty: {item.quantity})</span>
+                            <FaTrash
+                                className="ml-2 cursor-pointer text-red-500"
+                                onClick={() => dispatch(removeFromCartItems({ id: item.id }))}
+                            />
+                        </div>
+                    ))
+                ) : (
+                    <p className="text-gray-500">No Cart Items!!</p>
+                )}
+            </div>
+        </div>
+    );
+}
