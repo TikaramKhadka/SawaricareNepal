@@ -9,14 +9,14 @@ export default function Sidebar() {
     const dispatch = useDispatch();
 
     return (
-        <div className="w-full max-w-[260px] border-small px-1 py-2 rounded-small border-default-200 dark:border-default-100">
+        <div className="w-full max-w-[260px] border-small px-1 py-2 mt-16 rounded-small border-default-200 dark:border-default-100">
             {/* Wishlist Section */}
             <div className="mb-4">
                 <h2 className="text-lg font-bold mb-2">Wishlist Items ({wishlistItems.length}):</h2>
                 {wishlistItems.length > 0 ? (
                     wishlistItems.map((item, id) => (
                         <div className="flex items-center justify-between p-2 border-b border-gray-200" key={item.id}>
-                            <span>{id + 1} - {item.productName}</span>
+                            <span>{id + 1} - {item.title}</span>
                             <FaTrash
                                 className="ml-2 cursor-pointer text-red-500"
                                 onClick={() => dispatch(removeFromWishlist({ id: item.id }))}
@@ -34,7 +34,7 @@ export default function Sidebar() {
                 {cartItems.length > 0 ? (
                     cartItems.map((item, id) => (
                         <div className="flex items-center justify-between p-2 border-b border-gray-200" key={item.id}>
-                            <span>{id + 1} - {item.productName} (Qty: {item.quantity})</span>
+                            <span>{id + 1} - {item.title} (Qty: {item.quantity})</span>
                             <FaTrash
                                 className="ml-2 cursor-pointer text-red-500"
                                 onClick={() => dispatch(removeFromCartItems({ id: item.id }))}

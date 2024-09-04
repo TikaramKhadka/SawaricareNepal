@@ -1,3 +1,4 @@
+'use client'
 import React, { useState, useEffect, useRef } from 'react';
 import { FaBell, FaCog, FaUserCircle, FaSignOutAlt, FaKey, FaUser } from 'react-icons/fa';
 
@@ -36,9 +37,9 @@ const AdminNavbar = () => {
   }, []);
 
   return (
-    <nav className="bg-gray-800 text-white h-[100px] flex items-center px-6 shadow-lg relative">
+    <nav className="bg-gray-800 text-white h-[50px] flex items-center px-6 shadow-lg relative">
       <div className="flex items-center">
-        <span className="text-xl flex items-center font-bold uppercase h-14">
+        <span className="text-xl flex items-center font-bold uppercase h-5">
           Sawaricare Nepal
         </span>
       </div>

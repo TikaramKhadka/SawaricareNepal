@@ -1,48 +1,54 @@
 'use client';
+import AdminSidebar from '@/components/(authenticate)/adminsidebar/page';
 import Sidebar from '@/components/(authenticate)/sidebar/page';
 import { addToWishlist, addToCartItems } from '@/redux/reducerSlice/productSlice';
 import { Card, CardBody, CardFooter, Divider, Image, Tooltip } from '@nextui-org/react';
-import React from 'react';
-import { FaRegHeart, FaShoppingCart } from 'react-icons/fa';  // Importing cart icon
+import React, { useEffect, useState } from 'react';
+import { FaRegHeart, FaShoppingCart } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 
 const Product = () => {
     const dispatch = useDispatch();
+    const [productList, setProductList] = useState([]);
 
-    // Combined List with Categories
-    const items = [
-        { id: 10, productName: 'Ilam Tea', price: 250, productImage: 'https://sewapoint.com/himalayan-herb-images/Tea-ilam-tea-high-quality-orthodox-leaf-tea-jar-200gm-300x300.jpg', category: 'Tea' },
-        { id: 11, productName: 'Tokla Tea', price: 350, productImage: 'https://mahalmart.com.au/cdn/shop/products/tokla-chiya-mahal-mart.jpg?v=1680964731', category: 'Tea' },
-        { id: 12, productName: 'Darjeeling Tea', price: 200, productImage: 'https://www.teamoods.com/wp-content/uploads/2020/12/PM-D2.jpg', category: 'Tea' },
-        { id: 13, productName: 'Antu Tea', price: 400, productImage: 'https://www.shreeantu.com/wp-content/uploads/2020/06/M-P-500G-scaled.jpg', category: 'Tea' },
-        { id: 110, productName: 'Pressure Grease', price: 1250, productImage: 'https://fujima.org.np/wp-content/uploads/2020/02/extreme-pressure-300x300.png', category: 'Magic Lubricant' },
-        { id: 111, productName: 'Zoom HPT 15W40', price: 1350, productImage: 'https://fujima.org.np/wp-content/uploads/2020/02/Magic-ZOOM-HPT-4-ltr-300x300.png', category: 'Magic Lubricant' },
-        { id: 112, productName: 'Shocker Oil', price: 2000, productImage: 'https://fujima.org.np/wp-content/uploads/2020/02/shocker-oil-magic-300x300.png', category: 'Magic Lubricant' },
-        { id: 113, productName: 'Cool King', price: 1400, productImage: 'https://fujima.org.np/wp-content/uploads/2020/02/magic-coolking-300x300.png', category: 'Magic Lubricant' },
-    ];
+    const fetchProducts = async () => {
+        const res = await fetch('https://fakestoreapi.com/products');
+        const data = await res.json();
+        setProductList(data);
+    };
 
-    const groupedItems = items.reduce((acc, item) => {
-        if (!acc[item.category]) {
-            acc[item.category] = [];
+    useEffect(() => {
+        fetchProducts();
+    }, []);
+
+    // Group products by category
+    const groupedItems = productList.reduce((acc, product) => {
+        if (!acc[product.category]) {
+            acc[product.category] = [];
         }
-        acc[item.category].push(item);
+        acc[product.category].push(product);
         return acc;
     }, {});
 
     return (
-        <div className='flex ml-5'>
-            <div className='flex-grow flex flex-wrap gap-3 pr-5'>
-                {/* Render Categories */}
+        <div className="flex gap-2 p-2">
+            {/* Admin Sidebar */}
+            <div className="flex-shrink-0 w-64">
+                <AdminSidebar />
+            </div>
+
+            {/* Product List */}
+            <div className="flex-grow m-8">
                 {Object.entries(groupedItems).map(([category, items], index) => (
-                    <div key={index} className='w-full mb-8'>
-                        <h2 className='text-2xl font-bold mb-4'>{category}</h2>
-                        <div className='flex flex-wrap gap-3'>
+                    <div key={index} className="mb-6">
+                        <h2 className="text-2xl font-bold mb-2">{category}</h2>
+                        <div className="flex overflow-x-auto flex-wrap gap-4">
                             {items.map((item) => (
-                                <Card key={item.id} className='w-[250px] h-[350px]' shadow='md'>
+                                <Card key={item.id} className="w-[250px] flex-shrink-0 h-[350px]" shadow="md">
                                     <CardBody className="relative h-[250px] overflow-hidden">
                                         {/* Add to Cart Icon (Left) */}
-                                        <div className="absolute left-4 top-2 z-50">
-                                            <Tooltip content="Add to Cart" placement="top" className="z-50">
+                                        <div className="absolute left-2 top-2 z-50">
+                                            <Tooltip content="Add to Cart" placement="top">
                                                 <div
                                                     onClick={(event) => {
                                                         event.stopPropagation();
@@ -50,14 +56,14 @@ const Product = () => {
                                                     }}
                                                     className="cursor-pointer"
                                                 >
-                                                    <FaShoppingCart className='text-gray-500 hover:text-blue-500' />
+                                                    <FaShoppingCart className="text-gray-500 hover:text-blue-500" />
                                                 </div>
                                             </Tooltip>
                                         </div>
                                     
                                         {/* Wishlist Icon (Right) */}
-                                        <div className="absolute right-4 top-2 z-50">
-                                            <Tooltip content="Add to Wishlist" placement="top" className="z-50">
+                                        <div className="absolute right-2 top-2 z-50">
+                                            <Tooltip content="Add to Wishlist" placement="top">
                                                 <div
                                                     onClick={(event) => {
                                                         event.stopPropagation(); 
@@ -65,7 +71,7 @@ const Product = () => {
                                                     }}
                                                     className="cursor-pointer"
                                                 >
-                                                    <FaRegHeart className='text-gray-500 hover:text-red-500' />
+                                                    <FaRegHeart className="text-gray-500 hover:text-red-500" />
                                                 </div>
                                             </Tooltip>
                                         </div>
@@ -73,14 +79,14 @@ const Product = () => {
                                         <Image
                                             height="100%"
                                             width="100%"
-                                            src={item.productImage}
-                                            alt={item.productName}
-                                            className="object-cover"  // Ensures the image covers the area while maintaining aspect ratio
+                                            src={item.image} 
+                                            alt={item.title}   
+                                            className="object-cover" 
                                         />
                                     </CardBody>
                                     <Divider />
                                     <CardFooter className="flex justify-between">
-                                        <b>{item.productName}</b>
+                                        <b>{item.title}</b>  
                                         <p>NRP: {item.price}</p>
                                     </CardFooter>
                                 </Card>
@@ -88,8 +94,10 @@ const Product = () => {
                         </div>
                     </div>
                 ))}
-            </div>           
-            <div className='flex-shrink-0 w-[400px] mt-12'>
+            </div>
+
+            {/* Sidebar */}
+            <div className="flex-shrink-0 w-64">
                 <Sidebar />
             </div>
         </div>
@@ -97,4 +105,3 @@ const Product = () => {
 };
 
 export default Product;
-
