@@ -10,7 +10,6 @@ const Category = () => {
             <h3 className="text-lg font-extrabold">Category Details</h3>
           </div>
         </CardHeader>
-
         <CardBody className="gap-4 p-4">
           <div>
             <form className="w-full md:w-1/2">

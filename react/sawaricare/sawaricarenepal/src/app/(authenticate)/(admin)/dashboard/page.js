@@ -7,10 +7,7 @@ import React from "react";
 const AdminDashBoard = () => {
   return (
     <div className="flex flex-col">
-      <AdminNavbar/>
-      <div className="flex flex-1">
-        <AdminSidebar />
-        <MainContent/>
+      <div className="flex flex-1">  
       </div>
     </div>
   );
