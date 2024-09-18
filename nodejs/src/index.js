@@ -1,9 +1,11 @@
-const express = require('express')
-const UserRoute = require('./route/users')
-const app = express()
-const port = 3000
+const express = require('express');
+const UserRoute = require('./route/user');
+const app = express();
+const port = 5001;
 
-app.use(UserRoute)
+app.use(express.json()); // To parse incoming JSON data
+app.use('/api', UserRoute); // Prefix route with '/api'
+
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+  console.log(`Example app listening on port ${port}`);
+});
