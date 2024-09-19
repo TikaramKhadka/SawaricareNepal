@@ -26,7 +26,7 @@ CategoryRoute.get('/category', async (req, res) => {
         const data = await Category.find();
         res.status(200).send(data);
     } catch (error) {
-        res.status(400).send({ msg: "Data not found", error });
+        res.status(404).send({ msg: "Data not found", error });
     }
 });
 
@@ -48,7 +48,7 @@ CategoryRoute.post('/registercategory', async (req, res) => {
     try {
         const categoryExist = await Category.exists({ categoryName: req.body.categoryName });
         if (categoryExist) {
-            return res.status(400).send({ msg: "Category already exists" });
+            return res.status(404).send({ msg: "Category already exists" });
         }
         const newCategory = await Category.create(req.body);
         res.status(201).send({ msg: "Category added successfully", newCategory });

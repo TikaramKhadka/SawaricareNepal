@@ -54,7 +54,7 @@ UserRoute.post('/register', async (req, res) => {
         const emailExists = await User.exists({email:req.body.email})
         if(emailExists)
         {
-            return res.send({msg:'email already exist'})
+            return res.status(404).send({msg:'email already exist'})
         }
         // to encrypt password 
         req.body.password= bcrypt(req.body.password, saltRounds) 
