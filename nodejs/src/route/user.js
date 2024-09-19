@@ -30,7 +30,7 @@ UserRoute.get('/users', async (req, res) => {
         const data = await User.find();
         res.status(200).send(data);
     } catch (error) {
-        res.status(500).send({ msg: 'Error fetching users', error });
+        res.status(500).send({ msg: 'Error fetching users'});
     }
 });
 
@@ -39,7 +39,7 @@ UserRoute.get('/users/:id', async (req, res) => {
     try {
         const data = await User.findById(req.params.id);
         if (!data) {
-            return res.status(404).send({ msg: 'User not found' });
+            return res.status(404).send({ msg: 'User not found'});
         }
         res.status(200).send(data);
     } catch (error) {
@@ -85,11 +85,11 @@ UserRoute.post('/login', async (req, res)=>{
 // Update a user
 UserRoute.put('/users/:id', async (req, res) => {
     try {
-        const data = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const data = await User.findByIdAndUpdate(req.params.id, req.body);
         if (!data) {
             return res.status(404).send({ msg: 'User not found' });
         }
-        res.status(200).send({ msg: `${req.params.id} updated successfully`, data });
+        res.status(200).send({ msg: `${req.params.id} user updated successfully`, data });
     } catch (error) {
         res.status(500).send({ msg: 'Error updating user'});
     }
@@ -100,11 +100,11 @@ UserRoute.delete('/users/:id', async (req, res) => {
     try {
         const data = await User.findByIdAndDelete(req.params.id);
         if (!data) {
-            return res.status(404).send({ msg: 'User not found' });
+            return res.status(404).send({ msg: `${req.params.id} User not found` });
         }
         res.status(200).send({ msg: `${req.params.id} user deleted successfully` });
     } catch (error) {
-        res.status(500).send({ msg: 'Error deleting user', error });
+        res.status(500).send({ msg: 'Error deleting user'});
     }
 });
 
