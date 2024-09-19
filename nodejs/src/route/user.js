@@ -1,6 +1,8 @@
 const { Router } = require('express');
 const mongoose = require('mongoose');
 const UserRoute = Router();
+const bcrypt = require('bcrypt')
+const saltRounds = 10;
 
 mongoose.connect('mongodb://localhost:27017/mydb', 
     { useNewUrlParser: true, useUnifiedTopology: true })
@@ -41,20 +43,45 @@ UserRoute.get('/users/:id', async (req, res) => {
         }
         res.status(200).send(data);
     } catch (error) {
-        res.status(500).send({ msg: 'Error fetching user by ID', error });
+        res.status(500).send({ msg: 'Error fetching user by ID'});
     }
 });
 
 // Register a new user
 UserRoute.post('/register', async (req, res) => {
     try {
+        // to check existing email
+        const emailExists = await User.exists({email:req.body.email})
+        if(emailExists)
+        {
+            return res.send({msg:'email already exist'})
+        }
+        // to encrypt password 
+        req.body.password= bcrypt(req.body.password, saltRounds) 
+        // create new users
         const newUser = await User.create(req.body);
         res.status(201).send({ msg: "User registered successfully", newUser });
     } catch (error) {
-        res.status(500).send({ msg: 'Error registering user', error });
+        res.status(500).send({ msg: 'Error registering user' });
     }
 });
-
+UserRoute.post('/login', async (req, res)=>{
+    try {
+        const user = await User.findOne({email:req.body.email});
+        if (!user) {
+            return res.status(404).send({ msg: 'User not found' });
+        }
+        const isMatched = await bcrypt.compare(req.body.password, user.password);
+        if(isMatched){
+         const  token = jwt.sign({ email: req.body.email }, 'shhhhh');
+         res.send({user,token,isLoggedIn: true})
+        }else{
+         res.send({msg: 'incorrect password'})
+        }
+    } catch (error) {
+        res.status(500).send({ msg: 'something went worng'});
+    }
+})
 // Update a user
 UserRoute.put('/users/:id', async (req, res) => {
     try {
@@ -64,7 +91,7 @@ UserRoute.put('/users/:id', async (req, res) => {
         }
         res.status(200).send({ msg: `${req.params.id} updated successfully`, data });
     } catch (error) {
-        res.status(500).send({ msg: 'Error updating user', error });
+        res.status(500).send({ msg: 'Error updating user'});
     }
 });
 
