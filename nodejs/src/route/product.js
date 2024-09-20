@@ -86,5 +86,4 @@ mongoose.connect(process.env.DB_CONNECTION,
         }
     })
 
-
     module.exports = ProductRoute;
